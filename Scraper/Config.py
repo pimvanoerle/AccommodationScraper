@@ -1,5 +1,3 @@
-
-
 class Config:
 
     def __init__(self, url, scraper_type):

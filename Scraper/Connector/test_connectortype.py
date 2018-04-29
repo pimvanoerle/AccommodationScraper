@@ -4,12 +4,7 @@ from Scraper import Scraper
 
 class TestScraper(TestCase):
 
-    def test_scraper_invalid_scrape(self):
-        # tests if the scraper fails if an invalid scraper type is passed in
+    def test_get_connector_from_type(self):
+        # tests if we can get a connector if we know the connector type
         self.fail()
 
-    def test_scraper_run(self):
-        self.fail()
-
-    def test_demo_passer(self):
-        self.fail()
