@@ -1,3 +1,8 @@
+import urllib.request
+from bs4 import BeautifulSoup
+from Scraper.Config import Config
+from Scraper.Accommodation import Accommodation
+
 class Connector:
     """ base Connector class that fetches and parses an accomodation target.
     This base class does nothing much special, and should be extended
@@ -8,18 +13,39 @@ class Connector:
     Key notion is that of rate limiting
     """
 
-    def __init__(self):
-        self.timeout_seconds = 10
+    @staticmethod
+    def parse(retrieved_data):
+        """parses the retrieved data.
+        Returns an object of type Accommodation, or throws an exception if parsing fails.
+        """
+        return Accommodation()
+
+    def __init__(self, config):
+        self.config = config
+        self.timeout_seconds = 5
         pass
 
-    def do_connect(self):
+    @property
+    def config(self):
+        return self.__config
+
+    @config.setter
+    def config(self, val):
+        # there needs to be a config object
+        if not isinstance(val, Config):
+            raise Exception("config is not a config object")
+        self.__config = val
+
+    def retrieve_data(self):
         """Connects to a target url, as given in the instance's config object.
         will time out if taking too long and throw an Exception.
         Will rate limit if another connector instance of the same type is active
         """
-        return None
+        data = urllib.request.urlopen(self.config.url, None, self.timeout_seconds)
+        if data.status is not 200:
+            raise Exception("connection status was not 200")
+        return data
 
-    def do_parse(self, retrieved_data):
-        """parses the retrieved data.
-        Returns an object of type Accommodation, or throws and exception if not there.
-        """
+    def connect(self):
+        return self.parse(self.retrieve_data())
+
