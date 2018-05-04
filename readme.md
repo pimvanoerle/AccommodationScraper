@@ -60,8 +60,9 @@ Things to think about:
 
 
 Work left to do to make it POC worthy:
-* make a little config file for ease of changing airbnb values, server values etc
+* make a little config file for ease of changing airbnb values, server values etc. Add AirBnB and server config to that.
 * add some logging
 * add a rate limiter per connector type so that we don't spam too much
 * clean up this readme file
 * test that the repo can easily be pulled and ran
+* clean up and finish up unit tests
