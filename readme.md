@@ -10,8 +10,15 @@ https://www.airbnb.co.uk/rooms/14531512?s=51
 https://www.airbnb.co.uk/rooms/19278160?s=51
 https://www.airbnb.co.uk/rooms/19292873?s=51
 
+There are two modes in which the thing an operate - by instantiating the simple Scraper class for one-off instances (mostly for testing), and properly by starting the async web server in /Server/main.py
 
-Things left to do for an MVP version:
+That opens a little web server on 127.0.0.1:8081. To call, do the following:
+POST to 127.0.0.1:8081/accommodation, with as payload some json containing a URL field
+like {"url": "https://www.airbnb.co.uk/rooms/14531512?s=51"}
+
+that will return a serialized version of the Accommodation page that was requested, again as JSON.
+
+Things left to do for a proper MVP version, and some other considerations
 
 Language:
 * Scaling considerations:
@@ -40,6 +47,8 @@ General stuff
 * make asynchronous work in a better way
 * Localization: deal with localization of the one key thing that could be localized for this simple thing - the property name
 * Timeouts = we guard agianst the initial server request timing out via urllib, but should also keep track of the request closing, to stop a server stall keeping requests open. Need to check that
+* server connection push-back - we should figure out a limit of concurrent connections the server wants to handle. Should be configurable via file
+* we should add some level of caching, as these pages won't update that often. Process should be - call in, check if there's cache, return if so, otherwise kick off a scrape. 
 
 Specific to Scraper:
 * find a better way to register Connectors when written (now need to add new type in a different file, which is simple but could be forgotten)
@@ -51,9 +60,8 @@ Things to think about:
 
 
 Work left to do:
-* make a little config file for ease of changing airbnb values
-* add some logging
+* make a little config file for ease of changing airbnb values, server values etc
+* add some loggingreturn web.Response(status=500, text='An exception occured (this should be a tad more helpful really)')
 * make async
-* set up integration tests
 * add the simplest ever Server interface (use Klein or Flask)
-* add the rate limiter so that we don't spam too much
+* add the rate limiter per connector type so that we don't spam too much

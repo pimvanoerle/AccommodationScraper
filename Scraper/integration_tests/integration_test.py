@@ -1,4 +1,6 @@
 from unittest import TestCase
+import json
+import urllib.request
 from Scraper.Connector.ConnectorType import ConnectorTypes
 from Scraper.Config import Config
 from Scraper.Scraper import Scraper
@@ -6,6 +8,27 @@ from Scraper.Accommodation import Accommodation
 
 
 class TestScraper(TestCase):
+
+    def test_setup_client_and_test_server(self):
+        # this needs a running server!! at localhost:8081!
+        request = urllib.request.Request(
+            data=json.dumps({"url": "https://www.airbnb.co.uk/rooms/14531512?s=51"}).encode('utf8'),
+            url="http://127.0.0.1:8081/accommodation"
+        )
+        request.add_header('Content-Type', 'application/json')
+
+        requested_data = urllib.request.urlopen(
+            request
+        )
+        data = requested_data.read()
+        print(data)
+        encoding = requested_data.info().get_content_charset('utf-8')
+        accommodation = json.loads(data.decode(encoding))
+        self.assertEqual(accommodation["bathroom_count"], 1)
+        self.assertTrue("Garden Rooms" in accommodation["property_name"])
+        self.assertTrue("apartment" in accommodation["property_type"][0])
+
+
 
     def test_airbnb_3_cases_can_be_parsed(self):
         scraper = Scraper()

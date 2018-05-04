@@ -23,10 +23,3 @@ class TestScraper(TestCase):
         self.assertEqual(accommodation_data.bathroom_count, 1)
         self.assertTrue("Garden Rooms" in accommodation_data.property_name)
 
-    def test_scraper_can_set_parallel_limit(self):
-        # tests if the scraper can change the max parallel limit
-        self.fail()
-
-    def test_scraper_parallel_limit(self):
-        # tests if the scraper will limit once over the max parallel
-        self.fail()

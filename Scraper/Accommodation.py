@@ -36,6 +36,17 @@ class Accommodation:
         self.bathroom_count = bathroom_count
         self.amenities = amenities
 
+    def serialize(self):
+        """helper function to serialize to a dict for easy json output"""
+
+        return {
+            "property_name": self.property_name,
+            "property_type": self.property_type.value,
+            "bedroom_count": self.bedroom_count,
+            "bathroom_count": self.bathroom_count,
+            "amenities": [item.value for item in self.amenities]
+        }
+
     @property
     def property_name(self):
         return self.__property_name

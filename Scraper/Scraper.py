@@ -2,16 +2,7 @@ from Scraper.Connector import connector_helpers
 
 
 class Scraper:
-    """ central scraper class that:
-    1) reads a config from config object
-    2) finds the right type of connector (there's only one but hey) for each entry
-    3) kicks off a scrape asynchronously and sets up a parse on return into generic Accommodation format
-    4) dumps the results into a csv file (generically from the Accommodation thing)
-    This class should use AsyncIO to parallelize the tasks it is running (up to a maximum)
-    """
-    def __init__(self):
-        self.max_parallel = 4
-        pass
+    """ central scraper class that exists mainly for testing, proper use is through HTTP server"""
 
     def scrape(self, config_object):
         """Scrape the target indicate in config_object async.
