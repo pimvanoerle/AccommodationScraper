@@ -44,6 +44,16 @@ General stuff
 Specific to Scraper:
 * find a better way to register Connectors when written (now need to add new type in a different file, which is simple but could be forgotten)
 * extend Accommodation Types to be a more generic list (currently just what's needed for AirBnB)
+* for Tests: mock out the responses and endpoints, so that we don't always have to call the actual target (much cleaner, but also another layer of indirection that can hide issues)
 
 Things to think about:
 * this design is predicated on running cheap instances in AWS Lambda or the like. Cost should be a major consideration in where this should run, as that approach will get very costly at scale (and something like re-writing in an Actor pattern in Java/Akka could work well for that)
+
+
+Work left to do:
+* make a little config file for ease of changing airbnb values
+* add some logging
+* make async
+* set up integration tests
+* add the simplest ever Server interface (use Klein or Flask)
+* add the rate limiter so that we don't spam too much

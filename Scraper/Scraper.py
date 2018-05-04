@@ -1,4 +1,5 @@
-from Scraper import Accommodation
+from Scraper.Connector import connector_helpers
+
 
 class Scraper:
     """ central scraper class that:
@@ -17,4 +18,5 @@ class Scraper:
         Returns an Accommodation object with details
         Throws Exceptions when encountering errors
         """
-        raise Exception("Did not find valid scraper type")
+        return connector_helpers.get_connector(config_object).connect()
+

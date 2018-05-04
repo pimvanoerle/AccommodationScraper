@@ -1,6 +1,5 @@
 from enum import Enum
 
-
 class ConnectorTypes(Enum):
     """enum representing possible connector types. this is suboptimal as types need to be added
     to this list when a new connector is made, better to use reflection or the like. It will do
