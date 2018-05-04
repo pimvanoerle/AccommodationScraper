@@ -17,17 +17,17 @@ class Accommodation:
 
     # types of amenities
     # todo: only focused on airbnb-relevant types, needs extending to a generic list
-    Amenities = {
-        "Kitchen": "kitchen",
-        "WiFi": "am_wifi",
-        "CableTV": "am_cable_tv",
-        "TV": "am_tv",
-        "HairDryer": "am_hair_dryer",
-        "LaptopWorkspace": "am_laptop_workspace",
-        "Iron": "am_iron",
-        "Breakfast": "am_breakfast",
-        "Essentials": "am_essentials"
-    }
+    class Amenities(Enum):
+        Kitchen = "kitchen",
+        WiFi = "am_wifi",
+        CableTV = "am_cable_tv",
+        TV = "am_tv",
+        HairDryer ="am_hair_dryer",
+        LaptopWorkspace = "am_laptop_workspace",
+        Iron = "am_iron",
+        Breakfast = "am_breakfast",
+        Essentials = "am_essentials",
+        Unknown = "am_unknown"
 
     def __init__(self, property_name, property_type, bedroom_count, bathroom_count, amenities):
         self.property_name = property_name
@@ -64,10 +64,9 @@ class Accommodation:
 
     @bedroom_count.setter
     def bedroom_count(self, val):
-        # bedroom_count must be one or larger and less or equal to a sensible max
-        # todo: check assumption that there is always one bedroom at least (and check max)
-        if val <= 0 or val > self.max_bedrooms:
-            raise Exception("bedroom_count smaller than one or larger than max_bedrooms")
+        # bedroom_count can be zero but must be less or equal to a sensible max
+        if val < 0 or val > self.max_bedrooms:
+            raise Exception("bedroom_count smaller than zero or larger than max_bedrooms")
         self.__bedroom_count = val
 
     @property
@@ -90,6 +89,6 @@ class Accommodation:
     def amenities(self, val):
         # type must be one of Amenities
         for amenity in val:
-            if amenity not in self.Amenities.values():
+            if amenity not in self.Amenities:
                 raise Exception("one or more amenities not of Amenities enum")
         self.__amenities = val

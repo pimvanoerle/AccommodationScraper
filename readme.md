@@ -13,6 +13,11 @@ https://www.airbnb.co.uk/rooms/19292873?s=51
 
 Things left to do for an MVP version:
 
+Language:
+* Scaling considerations:
+* python is probably not the best language at large scale, it might be better to move to an actor pattern for scalability of this sort of thing (Akka on the JVM, Erlang on the EVM)
+* if many people will work on this, then working in a compiled language could be a consideration as that helps catch errors early. 
+
 General stuff
 * Logging: add logging - we should log to at least a rotating file (ideally to a central spot)
 * Logging: add some log levels so we can differentiate between info, debug, error, warn etc.
@@ -34,6 +39,7 @@ General stuff
 * extend the small API to have more functionality
 * make asynchronous work in a better way
 * Localization: deal with localization of the one key thing that could be localized for this simple thing - the property name
+* Timeouts = we guard agianst the initial server request timing out via urllib, but should also keep track of the request closing, to stop a server stall keeping requests open. Need to check that
 
 Specific to Scraper:
 * find a better way to register Connectors when written (now need to add new type in a different file, which is simple but could be forgotten)

@@ -1,25 +1,23 @@
 from unittest import TestCase
-from Scraper import Scraper
+from Scraper.Connector.ConnectorType import ConnectorTypes
+from Scraper.Config import Config
+from Scraper.Connector.ConnectorAirBnB import ConnectorAirBnB
 
 
 class TestScraper(TestCase):
 
-    def test_call_runner(self):
-        # tests if the connector will connect to AirBnB
-        self.fail()
-
-    def test_rate_limit(self):
-        # tests if the connector rate limits
-        self.fail()
-
-    def test_parser_wrong_data_throws(self):
-        # parse a pre-set chunk of wrong data and see if the parser excepts as expected
-        self.fail()
-
-    def test_parser_no_data_throws(self):
-        # parse a pre-set chunk of wrong data and see if the parser excepts as expected
-        self.fail()
+    @staticmethod
+    def create_config_instance():
+        return Config("https://www.airbnb.co.uk/rooms/14531512?s=51", ConnectorTypes.Airbnb)
 
     def test_parser_returns_accommodation(self):
         # parse a pre-set chunk of data and see if the parser returns as expected
         self.fail()
+
+
+    ## this is really an integration test, should move it there
+    def test_airbnb_can_be_parsed(self):
+        config = self.create_config_instance()
+        connector = ConnectorAirBnB(config)
+        accommodation_data = connector.connect()
+        self.assertEqual(1, accommodation_data.bathroom_count)

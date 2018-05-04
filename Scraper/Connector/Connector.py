@@ -1,5 +1,4 @@
 import urllib.request
-from bs4 import BeautifulSoup
 from Scraper.Config import Config
 from Scraper.Accommodation import Accommodation
 
@@ -17,6 +16,7 @@ class Connector:
     def parse(retrieved_data):
         """parses the retrieved data.
         Returns an object of type Accommodation, or throws an exception if parsing fails.
+        (which we accomplish in this case by building an empty Accommodation object, which will fail)
         """
         return Accommodation()
 
@@ -41,7 +41,14 @@ class Connector:
         will time out if taking too long and throw an Exception.
         Will rate limit if another connector instance of the same type is active
         """
-        data = urllib.request.urlopen(self.config.url, None, self.timeout_seconds)
+        request = urllib.request.Request(
+            url=self.config.url,
+            headers={'User-Agent': 'Mozilla/5.0'}
+        )
+        data = urllib.request.urlopen(
+            request,
+            timeout=self.timeout_seconds
+        )
         if data.status is not 200:
             raise Exception("connection status was not 200")
         return data
