@@ -59,9 +59,9 @@ Things to think about:
 * this design is predicated on running cheap instances in AWS Lambda or the like. Cost should be a major consideration in where this should run, as that approach will get very costly at scale (and something like re-writing in an Actor pattern in Java/Akka could work well for that)
 
 
-Work left to do:
+Work left to do to make it POC worthy:
 * make a little config file for ease of changing airbnb values, server values etc
-* add some loggingreturn web.Response(status=500, text='An exception occured (this should be a tad more helpful really)')
-* make async
-* add the simplest ever Server interface (use Klein or Flask)
-* add the rate limiter per connector type so that we don't spam too much
+* add some logging
+* add a rate limiter per connector type so that we don't spam too much
+* clean up this readme file
+* test that the repo can easily be pulled and ran
