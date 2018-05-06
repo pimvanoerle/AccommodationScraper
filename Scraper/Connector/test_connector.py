@@ -34,13 +34,13 @@ class TestConnector(TestCase):
         err = cm.exception
         self.assertEqual(str(err), '<urlopen error [Errno 8] nodename nor servname provided, or not known>')
 
-    def test_set_rate_limiter(self):
-        # tests if the connector accepts a change in the rate limiter
-        self.fail()
-
     def test_set_timeout(self):
         # tests if the connector accepts a change in the timeout
-        self.fail()
+        config = self.create_config_instance()
+        timeout = Connector.default_timeout_seconds + 2
+        connector = Connector(config, timeout)
+        self.assertEqual(connector.timeout_seconds, timeout)
+        # todo: we should add mocking so that we can test that the timout is passed into the http client
 
     def test_call_retrieve_data(self):
         # tests if the connector can run when be set up with a test config
@@ -48,13 +48,7 @@ class TestConnector(TestCase):
         connector = Connector(config)
         data = connector.retrieve_data()
         self.assertIsNotNone(data)
-        self.assertEquals(data.status, 200)
+        self.assertEqual(data.status, 200)
 
-    def test_rate_limit(self):
-        # tests if the connector rate limits
-        self.fail()
 
-    def test_parser_returns_empty(self):
-        # this base type has no parser, so should return an empty Accommodation object
-        self.fail()
 

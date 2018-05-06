@@ -2,6 +2,7 @@ import urllib.request
 from Scraper.Config import Config
 from Scraper.Accommodation import Accommodation
 
+
 class Connector:
     """ base Connector class that fetches and parses an accomodation target.
     This base class does nothing much special, and should be extended
@@ -9,8 +10,10 @@ class Connector:
     Connector and parser are combined into one to keep things simple, can be
     separated if needed (which then does mean implementing a new type in two places)
 
-    Key notion is that of rate limiting
+    Key notion is that of rate limiting - todo: implement rate limiting so we don't hammer the target
     """
+
+    default_timeout_seconds = 5  # todo: this should be config
 
     @staticmethod
     def parse(retrieved_data):
@@ -20,9 +23,9 @@ class Connector:
         """
         return Accommodation()
 
-    def __init__(self, config):
+    def __init__(self, config, timeout=default_timeout_seconds):
         self.config = config
-        self.timeout_seconds = 5
+        self.timeout_seconds = timeout
         pass
 
     @property

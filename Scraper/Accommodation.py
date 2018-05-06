@@ -22,11 +22,13 @@ class Accommodation:
         WiFi = "am_wifi",
         CableTV = "am_cable_tv",
         TV = "am_tv",
-        HairDryer ="am_hair_dryer",
+        HairDryer = "am_hair_dryer",
         LaptopWorkspace = "am_laptop_workspace",
         Iron = "am_iron",
         Breakfast = "am_breakfast",
         Essentials = "am_essentials",
+        Washer = "am_washer",
+        Hangers = "am_hangers",
         Unknown = "am_unknown"
 
     def __init__(self, property_name, property_type, bedroom_count, bathroom_count, amenities):

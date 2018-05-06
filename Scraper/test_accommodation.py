@@ -62,12 +62,12 @@ class TestAccommodation(TestCase):
         # tests the bedroom setter tests for values zero or smaller, or lager than max.
         vals = self.create_property_values()
 
-        for bedrooms in [0, -1, Accommodation.max_bedrooms + 1]:
+        for bedrooms in [-1, Accommodation.max_bedrooms + 1]:
             vals["bedrooms"] = bedrooms
             with self.assertRaises(Exception) as cm:
                 self.initialize_accommodation_instance(vals)
             err = cm.exception
-            self.assertEqual(str(err), 'bedroom_count smaller than one or larger than max_bedrooms')
+            self.assertEqual(str(err), 'bedroom_count smaller than zero or larger than max_bedrooms')
 
     def test_max_bedroom_count_can_be_changed(self):
         # tests the max bedroom setter
@@ -81,7 +81,7 @@ class TestAccommodation(TestCase):
         with self.assertRaises(Exception) as cm:
             self.initialize_accommodation_instance(vals)
         err = cm.exception
-        self.assertEqual(str(err), 'bedroom_count smaller than one or larger than max_bedrooms')
+        self.assertEqual(str(err), 'bedroom_count smaller than zero or larger than max_bedrooms')
 
     def test_bathroom_count_fails_if_wrong(self):
         # tests the bathroom setter tests for values zero or smaller, or lager than max.
