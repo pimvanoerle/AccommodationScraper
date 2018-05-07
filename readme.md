@@ -21,8 +21,11 @@ Written for Python3, see requirements.txt for the packages used (beautifulsoup a
 There are two modes in which the thing can operate - by instantiating the simple Scraper class for one-off instances (mostly for testing), and properly by running the async web server in /Server/main.py
 
 To do so from, please do the following:
+
 make sure to be using python3 with pip installed
+
 if virtualenv is not installed: pip3 install virtualenv
+
 in the root directory of the project (with server.py and requirements.txt etc), do:
 * create a virtualenv: python3 -m virtualenv env
 * activate virtualenv: source env/bin/activate
