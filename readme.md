@@ -20,13 +20,26 @@ Written for Python3, see requirements.txt for the packages used (beautifulsoup a
 
 There are two modes in which the thing can operate - by instantiating the simple Scraper class for one-off instances (mostly for testing), and properly by running the async web server in /Server/main.py
 
+To do so from, please do the following:
+make sure to be using python3 with pip installed
+if virtualenv is not installed: pip3 install virtualenv
+in the root directory of the project (with server.py and requirements.txt etc), do:
+* create a virtualenv: python3 -m virtualenv env
+* activate virtualenv: source env/bin/activate
+* install the requirements pip install -r requirements.txt
+* run the server: python server.py
+
+* in a different terminal, navigate to the same project root folder
+* activate virtualenv: source env/bin/activate
+* run the client tester: python scrape_three.py
+
 That opens a little web server on 127.0.0.1:8081. To call, do the following:
 POST to 127.0.0.1:8081/accommodation, with as payload some json containing a URL field
 like {"url": "https://www.airbnb.co.uk/rooms/14531512?s=51"}
 
 that will return a serialized version of the Accommodation page that was requested, again as JSON.
 
-To just see output on the console, run test_airbnb_3_cases_can_be_parsed in integration_tests.py.
+**To just see output on the console without any client/server interaction, run test_airbnb_3_cases_can_be_parsed in integration_tests.py.**
 
 ### small note on amenities (and fragility)
 

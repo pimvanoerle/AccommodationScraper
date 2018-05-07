@@ -11,10 +11,10 @@ from Scraper.Accommodation import Accommodation
 class TestScraper(TestCase):
 
     def test_setup_client_and_test_server(self):
-        # this needs a running server!! at localhost:8081!
+        # this needs a running server!! at localhost:8083!
         request = urllib.request.Request(
             data=json.dumps({"url": "https://www.airbnb.co.uk/rooms/14531512?s=51"}).encode('utf8'),
-            url="http://127.0.0.1:8081/accommodation"
+            url="http://127.0.0.1:8083/accommodation"
         )
         request.add_header('Content-Type', 'application/json')
 

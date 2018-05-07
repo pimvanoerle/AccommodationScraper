@@ -1,4 +1,4 @@
-from views import connect
+from Scraper.Server.views import connect
 
 
 def setup_routes(app):
