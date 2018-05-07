@@ -36,8 +36,8 @@ in the root directory of the project (with server.py and requirements.txt etc), 
 * activate virtualenv: source env/bin/activate
 * run the client tester: python scrape_three.py
 
-That opens a little web server on 127.0.0.1:8081. To call, do the following:
-POST to 127.0.0.1:8081/accommodation, with as payload some json containing a URL field
+That opens a little web server on 127.0.0.1:8083. To call, do the following:
+POST to 127.0.0.1:8083/accommodation, with as payload some json containing a URL field
 like {"url": "https://www.airbnb.co.uk/rooms/14531512?s=51"}
 
 that will return a serialized version of the Accommodation page that was requested, again as JSON.
